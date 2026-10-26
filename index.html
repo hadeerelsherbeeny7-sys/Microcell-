@@ -167,6 +167,30 @@
                 margin-bottom: 12px;
             }
 
+            /* تنسيق مشغل الفيديو */
+            .video-box {
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+
+            .video-box h3 {
+                margin: 0 0 10px;
+                font-size: 1.05rem;
+                color: var(--ink);
+            }
+
+            .video-player {
+                width: 100%;
+                max-height: 380px;
+                border-radius: 10px;
+                background: #000;
+                display: block;
+                outline: none;
+            }
+
             /* تنسيق الجداول العلمية */
             .table-wrap {
                 overflow-x: auto;
@@ -240,13 +264,14 @@
 
             .tab {
                 flex: 1;
-                padding: 10px;
+                padding: 10px 6px;
                 border-radius: 10px;
                 border: 1px solid var(--line);
                 background: var(--card);
                 color: var(--ink);
                 font: inherit;
                 font-weight: 600;
+                font-size: 0.9rem;
                 cursor: pointer;
             }
 
@@ -302,7 +327,6 @@
         <main id="app"></main>
 
         <script>
-            // تنظيف الكاش والـ Service Worker القديم تلقائياً
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.getRegistrations().then(registrations => {
                     for (let registration of registrations) {
@@ -315,6 +339,9 @@
                 {
                     id: 1,
                     title: "الخلية",
+                    videos: [
+                        { title: "فيديو شرح المحاضرة الأولى", src: "videos/vid_lec1.mp4" }
+                    ],
                     sections: [
                         { t: "مقدمة: عالم مكتظ بالنشاط", p: ["الخلية عالم مكتظ بالنشاط والتعقيد، والإجابة عن كل المعرفة الحيوية تبدأ منها.", "مركز القيادة: النواة.", "محطات الطاقة: الميتوكوندريا.", "الشبكة الإندوبلازمية وجهاز جولجي.", "نظام النقل: الأنابيب الدقيقة.", "الجدار الدفاعي: الغشاء البلازمي."] },
                         { t: "نظرية الخلية", p: ["روبرت هوك (1665): أول من شاهد الخلايا في الفلين الميت وسمّاها «خلية» لأنها بدت كغرف صغيرة.", "ليفينهوك (1670): أول من رأى كائنات حية متحركة (بكتيريا) بمجهر بسيط.", "شلايدن (نباتات) وشوان (حيوانات) 1830: الخلايا لبنات البناء الأساسية لكل الكائنات.", "فيرشو / ريماك (1855): كل خلية تنشأ من خلية موجودة مسبقًا.", "المبادئ الثلاثة: وحدة البناء، وحدة الوظيفة، استمرارية الحياة."] },
@@ -386,6 +413,10 @@
                 {
                     id: 2,
                     title: "الخلية الميكروبية",
+                    videos: [
+                        { title: "فيديو الشرح الأول (الجزء 1)", src: "videos/vid1_lec2.mp4" },
+                        { title: "فيديو الشرح الثاني (الجزء 2)", src: "videos/vid2_lec2.mp4" }
+                    ],
                     sections: [
                         { t: "النواة: التعريف والتركيب", p: ["العضية الرئيسية ومركز الخلية، تتحكم في كل الأنشطة الخلوية وتخزن المادة الوراثية DNA.", "توجد في خلايا الكائنات الحية ما عدا البكتيريا والطحالب الزرقاء المخضرة.", "أكبر أجزاء الخلية، وتمثل حوالي 10% من حجمها.", "الغشاء النووي: غشاء مزدوج به مسام نووية تسمح بمرور RNA والبروتينات بين النواة والسيتوبلازم.", "السيتوبلازم النووي: سائل هلامي فيه أملاح وإنزيمات.", "الكروماتين: DNA مع بروتينات الهيستون، خيوط في المرحلة غير الانقسامية وتتكثف لتكوّن الكروموسومات أثناء الانقسام.", "النوية: منطقة بلا غشاء، موقع تصنيع rRNA وتجميع الوحدات الريبوسومية."] },
                         { t: "وظيفة النواة", p: ["تخزين المعلومات الوراثية DNA.", "التحكم في نمو الخلية وانقسامها.", "توجيه تصنيع البروتينات عن طريق RNA.", "تنظيم عمليات التمثيل الغذائي داخل الخلية.", "تكوين النوية التي تنتج الريبوسومات.", "مكوناتها الأخرى: إنزيمات لتكرار DNA ومكونات تنظيمية للتحكم في التعبير الجيني."] },
@@ -446,6 +477,10 @@
                 {
                     id: 3,
                     title: "الخلية البكتيرية وتغذيتها ونموها",
+                    videos: [
+                        { title: "فيديو الشرح الأول (الجزء 1)", src: "videos/vid1_lec3.mp4" },
+                        { title: "فيديو الشرح الثاني (الجزء 2)", src: "videos/vid2_lec3.mp4" }
+                    ],
                     sections: [
                         {
                             t: "مقدمة واكتشاف الخلية البكتيرية",
@@ -623,7 +658,7 @@
                         <span class="num">${l.id}</span>
                         <span>
                             <div class="t">${l.title}</div>
-                            <div class="m">${l.sections ? `${l.sections.length} قسم · ${l.questions.length} سؤال` : 'قريبًا'}</div>
+                            <div class="m">${l.sections ? `${l.sections.length} قسم · ${l.questions.length} سؤال · ${l.videos ? l.videos.length : 0} فيديو` : 'قريبًا'}</div>
                         </span>
                     `;
                     if (l.sections) {
@@ -639,6 +674,7 @@
                     <h2>${l.title}</h2>
                     <div class="tabs">
                         <button class="tab ${tab === 'sec' ? 'on' : ''}" id="tabSec">الأقسام والشرح</button>
+                        <button class="tab ${tab === 'vid' ? 'on' : ''}" id="tabVid">فيديوهات الشرح (${l.videos ? l.videos.length : 0})</button>
                         <button class="tab ${tab === 'quiz' ? 'on' : ''}" id="tabQuiz">اختبار المحاضرة (${l.questions.length} سؤال)</button>
                     </div>
                     <div id="body"></div>
@@ -646,6 +682,7 @@
 
                 document.getElementById('backBtn').onclick = home;
                 document.getElementById('tabSec').onclick = () => lecture(l, 'sec');
+                document.getElementById('tabVid').onclick = () => lecture(l, 'vid');
                 document.getElementById('tabQuiz').onclick = () => lecture(l, 'quiz');
 
                 const body = document.getElementById('body');
@@ -675,13 +712,35 @@
                         if (i === 0) d.open = true;
                         body.appendChild(d);
                     });
+                } else if (tab === 'vid') {
+                    renderVideos(l, body);
                 } else {
                     renderQuiz(l, body);
                 }
             }
 
+            function renderVideos(l, container) {
+                if (!l.videos || l.videos.length === 0) {
+                    container.innerHTML = '<div class="sec">لا توجد فيديوهات متاحة لهذه المحاضرة حالياً.</div>';
+                    return;
+                }
+
+                container.innerHTML = '';
+                l.videos.forEach(v => {
+                    const box = document.createElement('div');
+                    box.className = 'video-box';
+                    box.innerHTML = `
+                        <h3>${v.title}</h3>
+                        <video class="video-player" controls preload="metadata">
+                            <source src="${v.src}" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو.
+                        </video>
+                    `;
+                    container.appendChild(box);
+                });
+            }
+
             function renderQuiz(l, container) {
-                // عزل الاختبار داخل قالب مستقل ومغلق
                 container.innerHTML = `
                     <div class="score-card">
                         <span id="scoreText">النتيجة الحالية: 0 / ${l.questions.length} (0%)</span>
@@ -693,7 +752,6 @@
                 const list = document.getElementById('quiz-list');
                 let score = 0;
 
-                // زر إعادة الاختبار يستدعي نفس الدالة ويمسح الحاوية بالكامل
                 document.getElementById('retryBtn').onclick = () => {
                     renderQuiz(l, container);
                 };
